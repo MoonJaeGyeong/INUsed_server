@@ -8,11 +8,11 @@ import Button from '../common/Button';
  */
 
 const LoginFormBlock = styled.div`
-  .p {
-    font-size: 3px;
+  p {
+    margin: 0;
     color: ${palette.gray[1]};
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -20,65 +20,75 @@ const LoginFormBlock = styled.div`
  * 스타일링 된 input
  */
 const StyledInput = styled.input`
-  font-size: 1rem;
   border: none;
-  border-botton: 1px solid ${palette.gray[0]};
+  border-radius: 20px;
   padding-bottom: 0.5rem;
   outline: none;
+  height: 45px;
+  font-size: 0.9rem;
   width: 100%;
+  display: flex;
+
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: 'Jua';
   &:focus {
-    color: $oc-teal-7;
-    border-buttom: 1px solid ${palette.gray[0]};
   }
   & + & {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
 `;
 
 /**
  * 홈 하단에 비밀번호 찾기 링크를 보여줌
  */
-const Footer1 = styled.div`
-  margin-top: 1rem;
-  text-align: left;
+const Footer = styled.div`
+  margin-top: 2rem;
   a {
     color: ${palette.gray[1]};
     text-decoration: underline;
+    font-size: 0.9rem;
     &:hover {
       color: ${palette.gray[0]};
+    }
+  }
+
+  span {
+    /* 모바일 세로화면*/
+    @media screen and (max-width: 576px) {
+      padding-right: 120px;
+    }
+    /* 모바일 가로화면*/
+    @media screen and (min-width: 577px && max-width:768) {
+      padding-right: 300px;
+    }
+
+    /* 데스크탑 화면*/
+    @media screen and (min-width: 769px) {
+      padding-right: 300px;
     }
   }
 `;
-/**
- * 홈 하단에 회원가입 링크를 보여줌
- */
-const Footer2 = styled.div`
+const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
-  text-align: right;
-  a {
-    color: ${palette.gray[1]};
-    text-decoration: underline;
-    &:hover {
-      color: ${palette.gray[0]};
-    }
-  }
 `;
 
 const LoginForm = () => {
   return (
     <LoginFormBlock>
-      <p>잠깐, 인천대학교 학생이신가요?</p>
       <form>
         <StyledInput name="email" placeholder="학교 이메일" />
         <StyledInput name="password" placeholder="비밀번호" type="password" />
-        <Button>로그인</Button>
+
+        <ButtonWithMarginTop pink="true" fullwidth="true">
+          로그인
+        </ButtonWithMarginTop>
       </form>
-      <Footer1>
+      <Footer>
         <Link to="/FindPassword">비밀번호 찾기</Link>
-      </Footer1>
-      <Footer2>
-        <Link to="/register">회원가입</Link>
-      </Footer2>
+        <span />
+
+        <Link to="/RegisterPage">회원가입</Link>
+      </Footer>
     </LoginFormBlock>
   );
 };

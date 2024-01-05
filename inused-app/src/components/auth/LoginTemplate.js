@@ -17,13 +17,36 @@ const LoginTemplateBlock = styled.div`
   flex-direction: column;
   fustify-content: center;
   align-items: center;
+
+  .logo-area {
+    display: block;
+    padding-top: 5.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .responsive-image {
+    /* 모바일 세로화면*/
+    @media screen and (max-width: 576px) {
+      max-width: 270px;
+    }
+    /* 모바일 가로화면*/
+    @media screen and (min-width: 577px && max-width: 768px) {
+      max-width: 270px;
+    }
+
+    /* 데스크탑 화면*/
+    @media screen and (min-width: 769px) {
+      width: 100%;
+      max-width: 1000px;
+    }
+  }
 `;
 
 const LoginTemplate = ({ children }) => {
   return (
     <LoginTemplateBlock>
-      <image src="Logo.png" alt="logo" />
-
+      <div className="logo-area">
+        <img className="responsive-image" src="Logo.png" alt="logo" />
+      </div>
       {children}
     </LoginTemplateBlock>
   );
