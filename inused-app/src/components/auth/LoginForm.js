@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
@@ -7,14 +7,7 @@ import Button from '../common/Button';
  * 첫 화면이자 로그인 폼을 보여 줍니다.
  */
 
-const LoginFormBlock = styled.div`
-  p {
-    margin: 0;
-    color: ${palette.gray[1]};
-    margin-bottom: 0.5rem;
-    font-size: 0.8rem;
-  }
-`;
+const LoginFormBlock = styled.div``;
 
 /**
  * 스타일링 된 input
@@ -27,8 +20,6 @@ const StyledInput = styled.input`
   height: 45px;
   font-size: 0.9rem;
   width: 100%;
-  display: flex;
-
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: 'Jua';
   &:focus {
@@ -36,6 +27,14 @@ const StyledInput = styled.input`
   & + & {
     margin-top: 0.5rem;
   }
+  ${(props) =>
+    props.small &&
+    css`
+      width: 70%;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      margin-right: 0.5rem;
+    `}
 `;
 
 /**
@@ -43,6 +42,7 @@ const StyledInput = styled.input`
  */
 const Footer = styled.div`
   margin-top: 2rem;
+  text-align: right;
   a {
     color: ${palette.gray[1]};
     text-decoration: underline;
@@ -53,41 +53,76 @@ const Footer = styled.div`
   }
 
   span {
-    /* 모바일 세로화면*/
-    @media screen and (max-width: 576px) {
-      padding-right: 120px;
-    }
-    /* 모바일 가로화면*/
-    @media screen and (min-width: 577px && max-width:768) {
-      padding-right: 300px;
-    }
-
-    /* 데스크탑 화면*/
-    @media screen and (min-width: 769px) {
-      padding-right: 300px;
+      padding-left: 300px;
     }
   }
 `;
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
+const textMap = {
+  login: '로그인',
+  register: '가입하기',
+};
 
-const LoginForm = () => {
+const LoginForm = ({ type }) => {
+  const text = textMap[type];
   return (
     <LoginFormBlock>
       <form>
-        <StyledInput name="email" placeholder="학교 이메일" />
-        <StyledInput name="password" placeholder="비밀번호" type="password" />
+        {type === 'register' && (
+          <StyledInput
+            small="true"
+            autoComplete="username"
+            name="username"
+            placeholder="닉네임"
+          />
+        )}
+        {type === 'register' && <Button small="true">중복확인</Button>}
+
+        {type === 'login' ? (
+          <StyledInput
+            autoComplete="useremail"
+            name="useremail"
+            placeholder="학교 이메일"
+          />
+        ) : (
+          <StyledInput
+            small="true"
+            autoComplete="useremail"
+            name="useremail"
+            placeholder="학교 이메일"
+          />
+        )}
+
+        {type === 'register' && <Button small="true">인증하기</Button>}
+        <StyledInput
+          autoComplete="new-password"
+          name="password"
+          placeholder="비밀번호"
+          type="password"
+        />
+        {type === 'register' && (
+          <StyledInput
+            autoComplete="new-password"
+            name="passwordConfirm"
+            placeholder="비밀번호  확인"
+            type="password"
+          />
+        )}
 
         <ButtonWithMarginTop pink="true" fullwidth="true">
-          로그인
+          {text}
         </ButtonWithMarginTop>
       </form>
       <Footer>
-        <Link to="/FindPassword">비밀번호 찾기</Link>
+        {type === 'login' && <Link to="/FindPassword">비밀번호 찾기</Link>}
         <span />
-
-        <Link to="/RegisterPage">회원가입</Link>
+        {type === 'login' ? (
+          <Link to="/register">회원 가입</Link>
+        ) : (
+          <Link to="/">뒤로 가기</Link>
+        )}
       </Footer>
     </LoginFormBlock>
   );
