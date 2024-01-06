@@ -10,7 +10,7 @@ const StyledButton = styled.button`
   outline: none;
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background: ${palette.gray[1]};
+  background: ${palette.gray[0]};
   &:hover {
     background: ${palette.pink[0]};
   }
@@ -34,6 +34,12 @@ const StyledButton = styled.button`
         background: ${palette.pink[0]};
       }
     `};
+  ${(props) =>
+    props.small &&
+    css`
+      height: 30px;
+      font-size: 0.9rem;
+    `}
 `;
 
 const Button = (props) => <StyledButton {...props} />;
