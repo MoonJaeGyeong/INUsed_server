@@ -7,7 +7,15 @@ import Button from '../common/Button';
  * 첫 화면이자 로그인 폼을 보여 줍니다.
  */
 
-const LoginFormBlock = styled.div``;
+const LoginFormBlock = styled.div`
+  p {
+    font-size: 0.9rem;
+    font-family: 'Jura';
+    text-align: center;
+    color: ${palette.pink[1]};
+    padding-top: 3rem;
+  }
+`;
 
 /**
  * 스타일링 된 input
@@ -124,6 +132,7 @@ const LoginForm = ({ type }) => {
           <Link to="/">뒤로 가기</Link>
         )}
       </Footer>
+      <p>Product By C-Komachi</p>
     </LoginFormBlock>
   );
 };
