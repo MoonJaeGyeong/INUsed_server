@@ -120,7 +120,7 @@ const LoginForm = ({ type }) => {
         )}
 
         <ButtonWithMarginTop pink="true" fullwidth="true">
-          {text}
+          <Link to="/main">{text}</Link>
         </ButtonWithMarginTop>
       </form>
       <Footer>

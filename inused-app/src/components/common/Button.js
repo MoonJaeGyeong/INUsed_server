@@ -39,7 +39,12 @@ const StyledButton = styled.button`
     css`
       height: 30px;
       font-size: 0.9rem;
-    `}
+    `};
+  ${(props) =>
+    props.icon &&
+    css`
+      display: flex;
+    `};
 `;
 
 const Button = (props) => <StyledButton {...props} />;
