@@ -22,6 +22,7 @@ const LoginTemplateBlock = styled.div`
 `;
 
 const FormBox = styled.div`
+  align-items: center;
   .logo-area {
     display: block;
     padding-bottom: 0.5rem;
