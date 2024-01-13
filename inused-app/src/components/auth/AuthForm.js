@@ -40,7 +40,7 @@ const StyledInput = styled.input`
   ${(props) =>
     props.small &&
     css`
-      width: 70%;
+      width: 60%;
       display: inline-block;
       margin-bottom: 0.5rem;
       margin-right: 0.5rem;
@@ -51,7 +51,7 @@ const StyledInput = styled.input`
  * 홈 하단에 비밀번호 찾기 링크를 보여줌
  */
 const Footer = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-align: right;
   a {
     color: ${palette.gray[1]};
@@ -63,7 +63,7 @@ const Footer = styled.div`
   }
 
   span {
-      padding-left: 300px;
+      padding-left: 159px;
     }
   }
 `;

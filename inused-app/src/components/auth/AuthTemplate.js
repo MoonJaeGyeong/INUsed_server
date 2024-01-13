@@ -24,12 +24,15 @@ const AuthTemplateBlock = styled.div`
 const FormBox = styled.div`
   align-items: center;
   .logo-area {
+    img {
+      width: 280px;
+    }
     display: block;
-    padding-bottom: 0.5rem;
     margin-top: 2rem;
+    padding-bottom: 0.3rem;
   }
   padding: 2rem;
-  width: 500px;
+  width: 350px;
 `;
 
 const AuthTemplate = ({ children }) => {
