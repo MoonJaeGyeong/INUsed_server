@@ -7,7 +7,7 @@ import Button from '../common/Button';
  * 첫 화면이자 로그인 폼을 보여 줍니다.
  */
 
-const LoginFormBlock = styled.div`
+const AuthFormBlock = styled.div`
   p {
     font-size: 0.9rem;
     font-family: 'Jura';
@@ -40,7 +40,7 @@ const StyledInput = styled.input`
   ${(props) =>
     props.small &&
     css`
-      width: 70%;
+      width: 60%;
       display: inline-block;
       margin-bottom: 0.5rem;
       margin-right: 0.5rem;
@@ -51,7 +51,7 @@ const StyledInput = styled.input`
  * 홈 하단에 비밀번호 찾기 링크를 보여줌
  */
 const Footer = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-align: right;
   a {
     color: ${palette.gray[1]};
@@ -63,7 +63,7 @@ const Footer = styled.div`
   }
 
   span {
-      padding-left: 300px;
+      padding-left: 159px;
     }
   }
 `;
@@ -75,53 +75,63 @@ const textMap = {
   register: '가입하기',
 };
 
-const LoginForm = ({ type }) => {
+const AuthForm = ({ type, form, onChange, onSubmit }) => {
   const text = textMap[type];
   return (
-    <LoginFormBlock>
-      <form>
+    <AuthFormBlock>
+      <form onSubmit={onSubmit}>
         {type === 'register' && (
           <StyledInput
             small="true"
-            autoComplete="username"
-            name="username"
+            autoComplete="nickname"
+            name="nickname"
             placeholder="닉네임"
+            onChange={onChange}
+            value={form.nickname}
           />
         )}
         {type === 'register' && <Button small="true">중복확인</Button>}
 
         {type === 'login' ? (
           <StyledInput
-            autoComplete="useremail"
-            name="useremail"
+            autoComplete="userid"
+            name="userid"
             placeholder="학교 이메일"
+            onChange={onChange}
+            value={form.userid}
           />
         ) : (
           <StyledInput
             small="true"
-            autoComplete="useremail"
-            name="useremail"
+            autoComplete="userid"
+            name="userid"
             placeholder="학교 이메일"
+            onChange={onChange}
+            value={form.userid}
           />
         )}
 
         {type === 'register' && <Button small="true">인증하기</Button>}
         <StyledInput
-          autoComplete="new-password"
-          name="password"
+          autoComplete="userpw"
+          name="userpw"
           placeholder="비밀번호"
           type="password"
+          onChange={onChange}
+          value={form.userpw}
         />
         {type === 'register' && (
           <StyledInput
-            autoComplete="new-password"
-            name="passwordConfirm"
+            autoComplete="userpwConfirm"
+            name="userpwConfirm"
             placeholder="비밀번호  확인"
             type="password"
+            onChange={onChange}
+            value={form.userpwConfirm}
           />
         )}
 
-        <ButtonWithMarginTop pink="true" fullwidth="true">
+        <ButtonWithMarginTop blue="true" fullwidth="true">
           <Link to="/main">{text}</Link>
         </ButtonWithMarginTop>
       </form>
@@ -135,8 +145,8 @@ const LoginForm = ({ type }) => {
         )}
       </Footer>
       <p>Product By C-Komachi</p>
-    </LoginFormBlock>
+    </AuthFormBlock>
   );
 };
 
-export default LoginForm;
+export default AuthForm;
