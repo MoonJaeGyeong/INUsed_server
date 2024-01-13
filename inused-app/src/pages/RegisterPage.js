@@ -1,5 +1,5 @@
-import LoginForm from '../components/auth/LoginForm';
-import LoginTemplate from '../components/auth/LoginTemplate';
+import LoginForm from '../components/auth/AuthForm';
+import LoginTemplate from '../components/auth/AuthTemplate';
 const RegisterPage = () => {
   return (
     <LoginTemplate>

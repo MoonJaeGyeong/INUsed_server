@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: ${palette.gray[0]};
   &:hover {
-    background: ${palette.pink[0]};
+    background: ${palette.blue[2]};
   }
 
   border-radius: 20px;
@@ -27,12 +27,9 @@ const StyledButton = styled.button`
       font-size: 1.125rem;
     `}
   ${(props) =>
-    props.pink &&
+    props.blue &&
     css`
-      background: linear-gradient(180deg, #dad4ec 0%, #f3e7e9 100%);
-      &hover: {
-        background: ${palette.pink[0]};
-      }
+      background: ${palette.blue[1]};
     `};
   ${(props) =>
     props.small &&
