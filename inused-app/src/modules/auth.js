@@ -25,10 +25,14 @@ export const changeField = createAction(
 
 export const initializeForm = createAction(INITIALIZE_FORM, ({ form }) => form); // register/login
 
-export const register = createAction(REGISTER, ({ userid, userpw }) => ({
-  userid,
-  userpw,
-}));
+export const register = createAction(
+  REGISTER,
+  ({ nickname, userid, userpw }) => ({
+    nickname,
+    userid,
+    userpw,
+  })
+);
 
 export const login = createAction(LOGIN, ({ userid, userpw }) => ({
   userid,
