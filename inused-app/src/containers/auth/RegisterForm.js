@@ -19,13 +19,6 @@ const RegisterForm = () => {
     dispatch(changeField({ form: 'register', key: name, value }));
   };
 
-  //닉네임 중복 확인 이벤트 핸들러
-  const onClick = (e) => {
-    e.preventDefault();
-    const { nickname } = form;
-    dispatch(register({ nickname }));
-  };
-
   //폼 등록 이벤트 핸들러
   const onSubmit = (e) => {
     e.preventDefault();
@@ -68,7 +61,6 @@ const RegisterForm = () => {
       form={form}
       onChange={onChange}
       onSubmit={onSubmit}
-      onClick={onClick}
     />
   );
 };
