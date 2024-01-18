@@ -75,7 +75,14 @@ const textMap = {
   register: '가입하기',
 };
 
-const AuthForm = ({ type, form, onChange, onClick, onSubmit }) => {
+const ErrorMessage = styled.div`
+  color: ${palette.blue[3]};
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+`;
+
+const AuthForm = ({ type, form, onChange, onClick, onSubmit, error }) => {
   const text = textMap[type];
   return (
     <AuthFormBlock>
@@ -134,6 +141,8 @@ const AuthForm = ({ type, form, onChange, onClick, onSubmit }) => {
             value={form.userpwConfirm}
           />
         )}
+
+        {error && <ErrorMessage>{error}</ErrorMessage>}
 
         <ButtonWithMarginTop blue="true" fullwidth="true">
           {text}

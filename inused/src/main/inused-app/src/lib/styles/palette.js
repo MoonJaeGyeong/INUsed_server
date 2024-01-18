@@ -5,6 +5,7 @@ const palette = {
     'linear-gradient(135deg, #e7f0fd 0%, #accbee 100%)',
     '#ACCBEE',
     '#86B6ED',
+    '#418DFF',
   ],
 };
 
