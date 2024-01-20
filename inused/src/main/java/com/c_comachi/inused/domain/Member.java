@@ -21,20 +21,27 @@ public class Member {
     @Column(name = "MEMBER_ID")
     private Long id;
 
+    @Column(nullable = false)
     private String email;
 
-    @Column(name = "MEMBER_NAME")
-    private String name;
+    @Column(name = "MEMBER_NAME", nullable = false)
+    private String nickName;
 
+    @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
+    public void setNickname(String nickname) {
+        this.nickName = nickName;
+    }
+    public void setPassword(String password) { this.password = password; }
+
     @Builder
     public Member(String email, String name, String password, Authority authority){
         this.email = email;
-        this.name = name;
+        this.nickName = name;
         this.password = password;
         this.authority = authority;
     }
