@@ -6,12 +6,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtProvider {
 
-    private String secretKey = "Se3cr3etK3ey";
+    @Value("${secret_key}")
+    private String secretKey;
 
     public String create(String email) {
 
