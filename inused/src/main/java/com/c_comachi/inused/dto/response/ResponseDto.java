@@ -1,7 +1,7 @@
 package com.c_comachi.inused.dto.response;
 
-import com.c_comachi.common.ResponseCode;
-import com.c_comachi.common.ResponseMessage;
+import com.c_comachi.inused.common.ResponseCode;
+import com.c_comachi.inused.common.ResponseMessage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

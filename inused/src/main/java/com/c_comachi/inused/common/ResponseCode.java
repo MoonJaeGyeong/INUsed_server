@@ -1,4 +1,4 @@
-package com.c_comachi.common;
+package com.c_comachi.inused.common;
 
 public interface ResponseCode {
 
