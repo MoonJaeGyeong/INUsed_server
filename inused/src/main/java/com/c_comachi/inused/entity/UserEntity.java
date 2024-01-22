@@ -1,47 +1,45 @@
-package com.c_comachi.inused.domain;
+package com.c_comachi.inused.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Getter
 @NoArgsConstructor
-public class Member {
-
+@AllArgsConstructor
+@Entity(name="user")
+@Table(name="user")
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MEMBER_ID")
+    @Column(name = "USER_ID")
     private Long id;
 
     @Column(nullable = false)
     private String email;
 
     @Column(name = "MEMBER_NAME", nullable = false)
-    private String nickName;
+    private String nickname;
 
     @Column(nullable = false)
     private String password;
+
+    private String profileImage;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
     public void setNickname(String nickname) {
-        this.nickName = nickName;
+        this.nickname = nickname;
     }
     public void setPassword(String password) { this.password = password; }
 
     @Builder
-    public Member(String email, String name, String password, Authority authority){
+    public UserEntity(String email, String nickname, String password, Authority authority){
         this.email = email;
-        this.nickName = name;
+        this.nickname = nickname;
         this.password = password;
         this.authority = authority;
     }
