@@ -1,5 +1,6 @@
 package com.c_comachi.inused.entity;
 
+import com.c_comachi.inused.dto.request.auth.RegisterRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,13 +21,17 @@ public class UserEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "MEMBER_NAME", nullable = false)
+    @Column(nullable = false)
     private String nickname;
 
     @Column(nullable = false)
     private String password;
 
     private String profileImage;
+
+    private Float fireTemperature;
+
+    //private Boolean agreedPersonal;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
@@ -37,10 +42,11 @@ public class UserEntity {
     public void setPassword(String password) { this.password = password; }
 
     @Builder
-    public UserEntity(String email, String nickname, String password, Authority authority){
-        this.email = email;
-        this.nickname = nickname;
-        this.password = password;
-        this.authority = authority;
+    public UserEntity(RegisterRequestDto dto){
+        this.email = dto.getEmail();
+        this.nickname = dto.getNickname();
+        this.password = dto.getPassword();
+        //this.agreedPersonal = dto.getAgreedPersonal();
+        //this.authority = ;
     }
 }
