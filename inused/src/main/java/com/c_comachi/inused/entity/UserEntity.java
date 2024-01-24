@@ -31,7 +31,7 @@ public class UserEntity {
 
     private Float fireTemperature;
 
-    //private Boolean agreedPersonal;
+    private Boolean agreedPersonal;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
@@ -46,7 +46,7 @@ public class UserEntity {
         this.email = dto.getEmail();
         this.nickname = dto.getNickname();
         this.password = dto.getPassword();
-        //this.agreedPersonal = dto.getAgreedPersonal();
-        //this.authority = ;
+        this.agreedPersonal = dto.getAgreedPersonal();
+        this.authority = Authority.ROLE_USER;
     }
 }
