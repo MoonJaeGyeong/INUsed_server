@@ -1,4 +1,4 @@
-package com.c_comachi.util;
+package com.c_comachi.inused.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
