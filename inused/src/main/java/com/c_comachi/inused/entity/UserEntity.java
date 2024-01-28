@@ -35,10 +35,6 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-    public void setPassword(String password) { this.password = password; }
 
     @Builder
     public UserEntity(RegisterRequestDto requestDto){

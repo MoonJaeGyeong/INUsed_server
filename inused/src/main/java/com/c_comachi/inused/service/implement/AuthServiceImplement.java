@@ -2,7 +2,7 @@ package com.c_comachi.inused.service.implement;
 
 import com.c_comachi.inused.dto.TokenDto;
 import com.c_comachi.inused.dto.request.auth.RegisterRequestDto;
-import com.c_comachi.inused.dto.request.auth.UserRequestDto;
+import com.c_comachi.inused.dto.request.auth.LoginRequestDto;
 import com.c_comachi.inused.dto.response.ResponseDto;
 import com.c_comachi.inused.dto.response.auth.RegisterResponseDto;
 import com.c_comachi.inused.entity.RefreshToken;
@@ -61,9 +61,9 @@ public class AuthServiceImplement implements AuthService {
 
     @Transactional
     @Override
-    public TokenDto login(UserRequestDto userRequestDto) {
+    public TokenDto login(LoginRequestDto loginRequestDto) {
         // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
-        UsernamePasswordAuthenticationToken authenticationToken = userRequestDto.toAuthentication();
+        UsernamePasswordAuthenticationToken authenticationToken = loginRequestDto.toAuthentication();
 
         // 2. 실제로 검증 (사용자 비밀번호 체크) 이 이루어지는 부분
         //    authenticate 메서드가 실행이 될 때 CustomUserDetailsService 에서 만들었던 loadUserByUsername 메서드가 실행됨
@@ -83,6 +83,9 @@ public class AuthServiceImplement implements AuthService {
         // 5. 토큰 발급
         return tokenDto;
     }
+
+    @Transactional
+    public TokenDto reissue()
 
 
 }
