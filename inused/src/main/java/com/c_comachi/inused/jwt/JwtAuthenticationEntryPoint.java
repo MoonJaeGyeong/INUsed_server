@@ -1,4 +1,4 @@
-package com.c_comachi.inused.config;
+package com.c_comachi.inused.jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,8 +14,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
         // 유효한 자격증명을 제공하지 않고 접근하려 할때 401
-        response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getWriter().write("{ \"code\": \"AF\", \"message\": \"Authorization Failed\" }");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }
