@@ -1,58 +1,67 @@
 package com.c_comachi.inused.config;
 
-import com.c_comachi.inused.filter.JwtAuthenticationFilter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import com.c_comachi.inused.jwt.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
-@Configurable
+@Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final TokenProvider tokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final CorsFilter corsFilter;
 
     @Bean
-    public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf(AbstractHttpConfigurer::disable);
-                //.httpBasic(HttpBasicConfigurer::disable);
-//                .cors().and()
-//                .csrf().disable()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-        httpSecurity
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/api/v1/auth/**", "/file/**").permitAll()
-                        .anyRequest().authenticated());
+    @Bean
+    protected SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        // CSRF 설정 Disable
+        httpSecurity.csrf().disable()
 
-        httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+
+                // exception handling 할 때 우리가 만든 클래스를 추가
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+
+                .and()
+                .headers()
+                .frameOptions()
+                .sameOrigin()
+
+                // 시큐리티는 기본적으로 세션을 사용
+                // 여기서는 세션을 사용하지 않기 때문에 세션 설정을 Stateless 로 설정
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                // 로그인, 회원가입 API 는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll 설정
+                .and()
+                .authorizeHttpRequests()
+                .requestMatchers("api/v1/auth/**").permitAll()
+                .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
+
+                // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
+                .and()
+                .apply(new JwtSecurityConfig(tokenProvider));
 
         return httpSecurity.build();
     }
 
-}
-
-class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint {
-
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response,
-                         AuthenticationException authException) throws IOException, ServletException {
-        response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getWriter().write("{ \"code\": \"AF\", \"message\": \"Authorization Failed\" }");
-    }
 }

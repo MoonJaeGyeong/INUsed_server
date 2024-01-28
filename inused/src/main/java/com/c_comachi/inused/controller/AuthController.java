@@ -1,7 +1,10 @@
 package com.c_comachi.inused.controller;
 
+import com.c_comachi.inused.dto.TokenDto;
 import com.c_comachi.inused.dto.request.auth.RegisterRequestDto;
+import com.c_comachi.inused.dto.request.auth.UserRequestDto;
 import com.c_comachi.inused.dto.response.ResponseDto;
+import com.c_comachi.inused.dto.response.UserResponseDto;
 import com.c_comachi.inused.dto.response.auth.RegisterResponseDto;
 import com.c_comachi.inused.service.AuthService;
 import jakarta.validation.Valid;
@@ -23,5 +26,9 @@ public class AuthController {
     public ResponseEntity<? super RegisterResponseDto> register(@RequestBody @Valid RegisterRequestDto requestBody) {
         ResponseEntity<? super RegisterResponseDto> response = authService.register(requestBody);
         return response;
+    }
+    @PostMapping("/login")
+    public ResponseEntity<TokenDto> login(@RequestBody UserRequestDto userRequestDto) {
+        return ResponseEntity.ok(authService.login(userRequestDto));
     }
 }

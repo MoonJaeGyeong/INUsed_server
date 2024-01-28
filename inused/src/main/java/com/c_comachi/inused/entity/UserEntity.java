@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity(name="user")
 @Table(name="user")
+@Builder
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID")
+    @Column(name = "user_id")
     private Long id;
 
     @Column(nullable = false)
@@ -29,9 +30,7 @@ public class UserEntity {
 
     private String profileImage;
 
-    private Float fireTemperature;
-
-    private Boolean agreedPersonal;
+    private Double fireTemperature;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
@@ -42,11 +41,11 @@ public class UserEntity {
     public void setPassword(String password) { this.password = password; }
 
     @Builder
-    public UserEntity(RegisterRequestDto dto){
-        this.email = dto.getEmail();
-        this.nickname = dto.getNickname();
-        this.password = dto.getPassword();
-        this.agreedPersonal = dto.getAgreedPersonal();
+    public UserEntity(RegisterRequestDto requestDto){
+        this.email = requestDto.getEmail();
+        this.password = requestDto.getPassword();
+        this.nickname = requestDto.getNickname();
+        this.fireTemperature = 36.5;
         this.authority = Authority.ROLE_USER;
     }
 }

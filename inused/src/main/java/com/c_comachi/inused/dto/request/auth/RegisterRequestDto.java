@@ -19,6 +19,4 @@ public class RegisterRequestDto {
     @NotBlank @Size(min=8, max=20)
     private String password;
 
-    @NotNull @AssertTrue
-    private Boolean agreedPersonal;
 }
