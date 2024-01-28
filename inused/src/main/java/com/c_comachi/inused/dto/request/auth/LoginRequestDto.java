@@ -11,21 +11,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRequestDto {
+public class LoginRequestDto {
 
     private String email;
     private String password;
-    private String nickname;
-
-    public UserEntity toUser(PasswordEncoder passwordEncoder) {
-        return UserEntity.builder()
-                .email(email)
-                .password(passwordEncoder.encode(password))
-                .nickname(nickname)
-                .fireTemperature(36.5)
-                .authority(Authority.ROLE_USER)
-                .build();
-    }
 
     public UsernamePasswordAuthenticationToken toAuthentication() {
         return new UsernamePasswordAuthenticationToken(email, password);
