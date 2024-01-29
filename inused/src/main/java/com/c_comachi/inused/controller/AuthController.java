@@ -1,9 +1,11 @@
 package com.c_comachi.inused.controller;
 
-import com.c_comachi.inused.dto.TokenDto;
+import com.c_comachi.inused.dto.response.auth.ReissueResponseDto;
+import com.c_comachi.inused.dto.response.auth.TokenDto;
 import com.c_comachi.inused.dto.request.auth.RegisterRequestDto;
 import com.c_comachi.inused.dto.request.auth.LoginRequestDto;
 import com.c_comachi.inused.dto.request.token.TokenRequestDto;
+import com.c_comachi.inused.dto.response.auth.LoginResponseDto;
 import com.c_comachi.inused.dto.response.auth.RegisterResponseDto;
 import com.c_comachi.inused.service.AuthService;
 import jakarta.validation.Valid;
@@ -27,12 +29,14 @@ public class AuthController {
         return response;
     }
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(@RequestBody LoginRequestDto loginRequestDto) {
-        return ResponseEntity.ok(authService.login(loginRequestDto));
+    public ResponseEntity<? super LoginResponseDto> login(@RequestBody @Valid LoginRequestDto requestBody) {
+        ResponseEntity<? super LoginResponseDto> response = authService.login(requestBody);
+        return response;
     }
 
     @PostMapping("/reissue")
-    public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
-        return ResponseEntity.ok(authService.reissue(tokenRequestDto));
+    public ResponseEntity<? super ReissueResponseDto> reissue(@RequestBody @Valid TokenRequestDto requestBody) {
+        ResponseEntity<? super ReissueResponseDto> response = authService.reissue(requestBody);
+        return response;
     }
 }
