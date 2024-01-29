@@ -11,10 +11,12 @@ public interface ResponseCode {
     String DUPLICATE_NICKNAME = "DN";
     String  UNHEALTHY_NICKNAME = "UN";
     String NOT_EXISTED_USER = "NU";
+    String MISMATCHED_TOKEN = "MT";
 
     // Http Status 401
     String LOGIN_FAILED = "LF";
     String AUTHORIZATION_FAILED = "AF";
+    String LOGGED_OUT_USER = "LU";
 
     // Http Status 403
     String NO_PERMISSION = "NP";

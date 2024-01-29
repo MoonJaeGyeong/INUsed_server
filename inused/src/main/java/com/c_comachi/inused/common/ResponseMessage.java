@@ -10,10 +10,12 @@ public interface ResponseMessage {
     String DUPLICATE_NICKNAME = "Duplicate nickname";
     String  UNHEALTHY_NICKNAME = "Unhealthy nickname";
     String NOT_EXISTED_USER = "Not Existed user";
+    String MISMATCHED_TOKEN = "Mismatched Token";
 
     // Http Status 401
     String LOGIN_FAILED = "Login failed";
     String AUTHORIZATION_FAILED = "Authorization failed";
+    String LOGGED_OUT_USER = "User has already Logged out";
 
     // Http Status 403
     String NO_PERMISSION = "No permission";
