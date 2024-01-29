@@ -1,4 +1,4 @@
-package com.c_comachi.inused.dto;
+package com.c_comachi.inused.dto.response.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
