@@ -35,11 +35,11 @@ public class UserEntity {
 
 
     @Builder
-    public UserEntity(RegisterRequestDto requestDto){
-        this.email = requestDto.getEmail();
-        this.password = requestDto.getPassword();
-        this.nickname = requestDto.getNickname();
-        this.fireTemperature = 36.5;
-        this.authority = Authority.ROLE_USER;
+    public UserEntity(String email, String password, String nickname, Double fireTemperature, Authority authority){
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.fireTemperature = fireTemperature;
+        this.authority = authority;
     }
 }

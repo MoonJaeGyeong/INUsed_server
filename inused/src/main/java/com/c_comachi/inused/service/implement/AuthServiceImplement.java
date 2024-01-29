@@ -51,12 +51,8 @@ public class AuthServiceImplement implements AuthService {
             boolean existedNickname = userRepository.existsByNickname(nickname);
             if (existedNickname) return RegisterResponseDto.duplicateNickname();
 
-            String password = requestDto.getPassword();
-            String encodedPassword = passwordEncoder.encode(password);
-            requestDto.setPassword(encodedPassword);
-
-            UserEntity userEntity = new UserEntity(requestDto);
-            userRepository.save(userEntity);
+            UserEntity user = requestDto.toUser(passwordEncoder);
+            userRepository.save(user);
 
         } catch (Exception exception){
             exception.printStackTrace();
