@@ -18,7 +18,7 @@ public class RegisterRequestDto {
     @NotBlank
     private String nickname;
 
-    @NotBlank @Size(min=8, max=20)
+    @NotBlank
     private String password;
 
     public UserEntity toUser(PasswordEncoder passwordEncoder) {
