@@ -14,4 +14,10 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/registration")
+    public String registartion() {
+        log.info("회원가입");
+        return "registration";
+    }
+
 }
