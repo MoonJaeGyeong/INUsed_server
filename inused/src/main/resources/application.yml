@@ -1,8 +1,8 @@
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3305/inused?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: mjk
+    url: jdbc:mariadb://3.34.111.53:3306/inused?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: mjk8087
     password: jamin23
 
   jpa:
